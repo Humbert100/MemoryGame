@@ -44,8 +44,8 @@ def tap(x, y):
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
     else:
-        hide[spot] = False
-        hide[mark] = False
+        hide[spot], hide[mark] = False, False
+        state['pairs'] += 1 #Contador de pares
         state['mark'] = None
 
 
