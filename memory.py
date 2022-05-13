@@ -6,7 +6,6 @@ from turtle import *
 from wsgiref.validate import WriteWrapper #Mostrar texto en pantalla
 from freegames import path
 
-
 car = path('car.gif')
 tiles = list(range(32)) * 2
 state = {'mark': None, 'pairs':0, 'taps':0} #Contador de pairs y taps
