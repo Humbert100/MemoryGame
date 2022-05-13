@@ -25,16 +25,13 @@ def square(x, y):
         left(90)
     end_fill()
 
-
 def index(x, y):
     """Convert (x, y) coordinates to tiles index."""
     return int((x + 200) // 50 + ((y + 200) // 50) * 8)
 
-
 def xy(count):
     """Convert tiles count to (x, y) coordinates."""
     return (count % 8) * 50 - 200, (count // 8) * 50 - 200
-
 
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
@@ -108,8 +105,17 @@ def draw():
 
     update()
     ontimer(draw, 100)
-
-
+    
+ "                                   Función win                                             "
+def win():
+    "Se dibuja la imagen que se muestra con el juego haya finalizado"
+    clear() #Limpiar tablero
+    goto(10, 10) #Situar 
+    shape(car) #Se toma como figura a la imagen
+    stamp() #Estampa la copia de la figura
+    update() #Actualización de turtle screen
+    ontimer(win, 50) #Se asigna valor 50 para fijar imagen
+   
 shuffle(tiles)
 setup(420, 420, 370, 0)
 addshape(car)
