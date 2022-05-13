@@ -1,5 +1,6 @@
 """Memory, puzzle game of number pairs.
 Author: Humberto Alejandro Rosas Téllez
+Author2: Mariana Edith Ramírez Navarrete 
 """
 from random import *
 from turtle import *
@@ -10,6 +11,11 @@ car = path('car.gif')
 tiles = list(range(32)) * 2
 state = {'mark': None, 'pairs':0, 'taps':0} #Contador de pairs y taps
 hide = [True] * 64
+
+#ARCR: Se creo Array para los indices como letras y simbolos, por si acaso las letras no bastan.
+otherind =  ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 
+'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 
+'X', 'Y', 'Z''*','?','¿','!','+','-','$']
 
 writer = Turtle(visible=True)
 
@@ -102,9 +108,13 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        # VRDL. Se centran números modificando valores sumados a x y y
+        goto(x + 25, y + 2)
         color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        tilmark = tiles[mark]
+        #VRDL. Se añadió "align = "center""
+        write(otherind[tilmark], font=('Arial', 30, 'normal'), align = "center")
+
 
     update()
     ontimer(draw, 100)
