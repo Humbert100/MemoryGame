@@ -4,7 +4,7 @@ Author: Humberto Alejandro Rosas Téllez
 
 from random import *
 from turtle import *
-
+from wsgiref.validate import WriteWrapper #Mostrar texto en pantalla
 from freegames import path
 
 car = path('car.gif')
