@@ -1,20 +1,21 @@
 """Memory, puzzle game of number pairs.
 Author: Humberto Alejandro Rosas Téllez
 """
-
 from random import *
 from turtle import *
 from wsgiref.validate import WriteWrapper #Mostrar texto en pantalla
 from freegames import path
+
 
 car = path('car.gif')
 tiles = list(range(32)) * 2
 state = {'mark': None, 'pairs':0, 'taps':0} #Contador de pairs y taps
 hide = [True] * 64
 
+writer = Turtle(visible=True)
 
 def square(x, y):
-    """Draw white square with black outline at (x, y)."""
+    "Draw white square with black outline at (x, y)."
     up()
     goto(x, y)
     down()
@@ -26,26 +27,29 @@ def square(x, y):
     end_fill()
 
 def index(x, y):
-    """Convert (x, y) coordinates to tiles index."""
+    "Convert (x, y) coordinates to tiles index."
     return int((x + 200) // 50 + ((y + 200) // 50) * 8)
 
 def xy(count):
-    """Convert tiles count to (x, y) coordinates."""
+    "Convert tiles count to (x, y) coordinates."
     return (count % 8) * 50 - 200, (count // 8) * 50 - 200
 
 def tap(x, y):
-    """Update mark and hidden tiles based on tap."""
+    "Update mark and hidden tiles based on tap."
+    writer.undo()
+    writer.color('red')
     spot = index(x, y)
     mark = state['mark']
 
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
+        print(state['mark'])
     else:
         hide[spot], hide[mark] = False, False
         state['pairs'] += 1 #Contador de pares
         state['mark'] = None
-
-  '''
+   
+    '''
                                     Juego Completo
     Si usted desea encontrar todos los pares del memorama, debe de descomentar el 
     siguiente bloque de código y comentar el código que comienza con el if state['pairs'] ==1: 
@@ -61,8 +65,8 @@ def tap(x, y):
         write_total() #Llamar a función write_total(); muestra "You win!" y "Total:"                
     else: #Si no se cumple condición anterior, se continúa con el conteo de taps
         state['taps'] += 1 
-        write_taps() #Llamar a función write_taps(); enseña "Taps"
-        
+        write_taps() #Llamar a función write_taps(); enseña "Taps" 
+
 "                                   Función write_total                                             "
 def write_total():
     writer.color('red') #Asigna color rojo al texto
@@ -73,17 +77,17 @@ def write_total():
     writer.goto(450,-50) #Posición del valor de Total
      #Formato del valor Total; se suma 1 al contador taps para considerar el conteo del último tap
     writer.write(state['taps']+1, font=('Arial',50,'normal')) 
-    
+
 "                                   Función write_taps                                             "
 def write_taps():
     writer.color('red') #Asigna color rojo al texto
     writer.goto(210,-50) #Posición del texto Taps
     writer.write("Taps: ",font=('Arial',60,'normal')) #Formato del texto Taps
     writer.goto(450,-50) #Posición del valor de Taps
-    writer.write(state['taps'], font=('Arial',50,'normal')) #Formato del valor Taps     
- 
+    writer.write(state['taps'], font=('Arial',50,'normal')) #Formato del valor Taps 
+
 def draw():
-    """Draw image and tiles."""
+    "Draw image and tiles."
     clear()
     goto(0, 0)
     shape(car)
@@ -105,8 +109,8 @@ def draw():
 
     update()
     ontimer(draw, 100)
-    
- "                                   Función win                                             "
+
+"                                   Función win                                             "
 def win():
     "Se dibuja la imagen que se muestra con el juego haya finalizado"
     clear() #Limpiar tablero
@@ -115,7 +119,7 @@ def win():
     stamp() #Estampa la copia de la figura
     update() #Actualización de turtle screen
     ontimer(win, 50) #Se asigna valor 50 para fijar imagen
-   
+    
 shuffle(tiles)
 setup(420, 420, 370, 0)
 addshape(car)
