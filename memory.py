@@ -76,6 +76,14 @@ def write_total():
     writer.goto(450,-50) #Posición del valor de Total
      #Formato del valor Total; se suma 1 al contador taps para considerar el conteo del último tap
     writer.write(state['taps']+1, font=('Arial',50,'normal')) 
+    
+"                                   Función write_taps                                             "
+def write_taps():
+    writer.color('red') #Asigna color rojo al texto
+    writer.goto(210,-50) #Posición del texto Taps
+    writer.write("Taps: ",font=('Arial',60,'normal')) #Formato del texto Taps
+    writer.goto(450,-50) #Posición del valor de Taps
+    writer.write(state['taps'], font=('Arial',50,'normal')) #Formato del valor Taps     
  
 def draw():
     """Draw image and tiles."""
