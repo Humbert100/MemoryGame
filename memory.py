@@ -64,8 +64,19 @@ def tap(x, y):
         write_total() #Llamar a función write_total(); muestra "You win!" y "Total:"                
     else: #Si no se cumple condición anterior, se continúa con el conteo de taps
         state['taps'] += 1 
-        write_taps() #Llamar a función write_taps(); enseña "Taps"         
-
+        write_taps() #Llamar a función write_taps(); enseña "Taps"
+        
+"                                   Función write_total                                             "
+def write_total():
+    writer.color('red') #Asigna color rojo al texto
+    writer.goto(-210,250) #Posición del texto YOU WIN!       
+    writer.write("YOU WIN!", font=('Arial',60,'normal')) #Formato del texto YOU WIN!  
+    writer.goto(210,-50) #Posición del texto Total
+    writer.write("Taps: ",font=('Arial',60,'normal')) #Formato del texto Total:  
+    writer.goto(450,-50) #Posición del valor de Total
+     #Formato del valor Total; se suma 1 al contador taps para considerar el conteo del último tap
+    writer.write(state['taps']+1, font=('Arial',50,'normal')) 
+ 
 def draw():
     """Draw image and tiles."""
     clear()
